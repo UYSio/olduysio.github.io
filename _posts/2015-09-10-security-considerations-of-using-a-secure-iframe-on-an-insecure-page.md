@@ -52,9 +52,23 @@ Clone [this gist](https://gist.github.com/opyate/5dd65f5529d9508cf78e), or follo
 
 Create this simple index file:
 {% gist 5dd65f5529d9508cf78e index.html %}
+<noscript>
+{% highlight html linenos=table %}
+<p>IFRAME below</p>
+<iframe id="frame1" src="http://localhost:8000/i-dont-matter.html"></iframe>
+{% endhighlight %}
+</noscript>
 
 Create this simple form which will be loaded by the IFRAME:
 {% gist 5dd65f5529d9508cf78e i-dont-matter.html %}
+<noscript>
+{% highlight html linenos=table %}
+<form action="https://httpbin.org/post" method="POST">
+  <input name="secret" placeholder="Secret stuff here">
+  <input type="submit">
+</form>
+{% endhighlight %}
+</noscript>
 
 Host the code locally with Python:
 
@@ -64,6 +78,18 @@ Go to [http://localhost:8000](http://localhost:8000) in your browser, and submit
 
 Now, reload the page, but open your browser's dev tools, and paste the code from the hack into the JavaScript console:
 {% gist 5dd65f5529d9508cf78e hack.js %}
+<noscript>
+{% highlight javascript linenos=table %}
+var contents = '<form action="https://httpbin.org/post" method="POST">';
+contents += '<input name="secret" placeholder="Secret stuff here">';
+contents += '<input type="submit" onclick="return hack()">';
+contents += '<script type="text/javascript">';
+contents += 'function hack() { alert("h4x0rz"); }';
+contents += '</script>';
+contents += '</form>';
+document.getElementById('frame1').src = "data:text/html;charset=utf-8," + escape(contents);
+{% endhighlight %}
+</noscript>
 
 This is the MITM attack. This is what the attacker could do with the "in-the-clear data stream" we discussed before. The attacker simply matched on a known token (like the form submit button) and injected custom code with which to do evil.
 

@@ -10,6 +10,7 @@ twitter_username: opyate
 github_username:  opyate
 
 # Build settings
+highlighter: pygments
 markdown: kramdown
 kramdown:
   input: GFM
