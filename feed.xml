@@ -1,30 +1,374 @@
----
-layout: null
----
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>{{ site.title | xml_escape }}</title>
-    <description>{{ site.description | xml_escape }}</description>
-    <link>{{ site.url }}{{ site.baseurl }}/</link>
-    <atom:link href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml"/>
-    <pubDate>{{ site.time | date_to_rfc822 }}</pubDate>
-    <lastBuildDate>{{ site.time | date_to_rfc822 }}</lastBuildDate>
-    <generator>Jekyll v{{ jekyll.version }}</generator>
-    {% for post in site.posts limit:10 %}
+    <title>Unleash Your Server</title>
+    <description>Unleash Your Server LTD is the professional playground of Juan Matthys Uys.
+</description>
+    <link>http://essays.uys.io/</link>
+    <atom:link href="http://essays.uys.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Mon, 19 Oct 2015 16:33:38 +0100</pubDate>
+    <lastBuildDate>Mon, 19 Oct 2015 16:33:38 +0100</lastBuildDate>
+    <generator>Jekyll v2.5.3</generator>
+    
       <item>
-        <title>{{ post.title | xml_escape }}</title>
-        <description>{{ post.content | xml_escape }}</description>
-        <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
-        <link>{{ post.url | prepend: site.baseurl | prepend: site.url }}</link>
-        <guid isPermaLink="true">{{ post.url | prepend: site.baseurl | prepend: site.url }}</guid>
-        {% for tag in post.tags %}
-        <category>{{ tag | xml_escape }}</category>
-        {% endfor %}
-        {% for cat in post.categories %}
-        <category>{{ cat | xml_escape }}</category>
-        {% endfor %}
+        <title>A Spacemacs layer for Pixie</title>
+        <description>&lt;p&gt;A major mode for &lt;a href=&quot;https://github.com/pixie-lang/pixie&quot;&gt;Pixie&lt;/a&gt; already &lt;a href=&quot;https://github.com/johnwalker/pixie-mode&quot;&gt;exists&lt;/a&gt;, but I would like to use it in evil mode from &lt;a href=&quot;https://github.com/syl20bnr/spacemacs&quot;&gt;Spacemacs&lt;/a&gt;. Hence, a &lt;a href=&quot;https://github.com/UYSio/pixie-spacemacs-layer&quot;&gt;custom layer&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I repeat the steps I took here in a mini tutorial format.&lt;/p&gt;
+
+&lt;h1 id=&quot;create-a-custom-layer-for-spacemacs&quot;&gt;Create a custom layer for Spacemacs&lt;/h1&gt;
+
+&lt;p&gt;Start with creating the layer from within Spacemacs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;SPC&amp;gt; : configuration-layer/create-layer &amp;lt;RET&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Press &lt;code&gt;&amp;lt;RET&amp;gt;&lt;/code&gt; again to create the layer in the default directory &lt;code&gt;$HOME/.emacs.d/private&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Choose a layer name, e.g. &lt;code&gt;pixie&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Spacemacs then throws you into the &lt;a href=&quot;https://github.com/syl20bnr/spacemacs/blob/696f2d461a81b2c0640ae7da113edf1374050ecd/core/templates/packages.template&quot;&gt;packages.el&lt;/a&gt; for your new layer.&lt;/p&gt;
+
+&lt;p&gt;Now is a good time to study &lt;a href=&quot;https://github.com/syl20bnr/spacemacs/blob/master/doc/LAYERS.org&quot;&gt;layers&lt;/a&gt;, but the gist is this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;hook in the modes you’re layering in &lt;code&gt;(setq &amp;lt;your-layer&amp;gt;-packages ...)&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;set the key combinations for your &lt;a href=&quot;https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org#evil-leader&quot;&gt;Evil Leader&lt;/a&gt; in the &lt;code&gt;(defun &amp;lt;your-layer&amp;gt;/init-&amp;lt;your-layer&amp;gt; () ...)&lt;/code&gt; form&lt;/li&gt;
+  &lt;li&gt;optionally define custom commands here and bind to them&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;PS The Evil Leader in Spacemacs is &lt;code&gt;SPC&lt;/code&gt; (YES! that’s where Spacemacs gets its name from).&lt;/p&gt;
+
+&lt;h1 id=&quot;result&quot;&gt;Result&lt;/h1&gt;
+
+&lt;p&gt;Here’s what I came up with for Pixie. At the moment, it offers bindings to start the REPL, and eval s-expressions (and an option to jump to the REPL after evaluation).&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elisp&quot; data-lang=&quot;elisp&quot;&gt;&lt;span class=&quot;c1&quot;&gt;;;; packages.el --- pixie Layer packages File for Spacemacs&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; Copyright (c) 2012-2014 Sylvain Benner&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; Copyright (c) 2014-2015 Sylvain Benner &amp;amp; Contributors&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; Author: Sylvain Benner &amp;lt;sylvain.benner@gmail.com&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; URL: https://github.com/syl20bnr/spacemacs&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; This file is not part of GNU Emacs.&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;; License: GPLv3&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;;; List of all packages to install and/or initialize. Built-in packages&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; which require an initialization must be listed explicitly in the list.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;setq&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pixie-packages&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;;; package names go here&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;inf-clojure&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;pixie-mode&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;;; List of packages to exclude.&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;setq&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pixie-excluded-packages&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pixie/post-init-inf-clojure&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;add-hook&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;pixie-mode-hook&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;inf-clojure-minor-mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pixie/init-pixie-mode&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;use-package&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;pixie-mode&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:defer&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;
+    &lt;span class=&quot;ss&quot;&gt;:config&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;progn&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;spacemacs/pixie-eval-and-switch-to-repl&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&amp;quot;Call `inf-clojure-eval-last-sexp&amp;#39; and switch to REPL buffer in `insert state&amp;#39;&amp;quot;&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;interactive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inf-clojure-eval-last-sexp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;inf-clojure-switch-to-repl&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;evil-insert-state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+
+      &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;evil-leader/set-key-for-mode&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;pixie-mode&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;;; REPL&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&amp;quot;msi&amp;quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;inf-clojure-switch-to-repl&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&amp;quot;msb&amp;quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;inf-clojure-eval-last-sexp&lt;/span&gt;
+        &lt;span class=&quot;s&quot;&gt;&amp;quot;msB&amp;quot;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;&amp;#39;spacemacs/pixie-eval-and-switch-to-repl&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))))&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;;; For each package, define a function pixie/init-&amp;lt;package-name&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; (defun pixie/init-my-package ()&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;   &amp;quot;Initialize my package&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;   )&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; Often the body of an initialize function uses `use-package&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; For more info on `use-package&amp;#39;, see readme:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;;; https://github.com/jwiegley/use-package&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It’s by no means complete, and I plan to implement basic functionality involving navigation, documentation, tests (Pixie test frameworks permitting), and evaluation of more forms.&lt;/p&gt;
+</description>
+        <pubDate>Sat, 17 Oct 2015 16:35:34 +0100</pubDate>
+        <link>http://essays.uys.io/2015/10/17/spacemacs-layer-for-pixie.html</link>
+        <guid isPermaLink="true">http://essays.uys.io/2015/10/17/spacemacs-layer-for-pixie.html</guid>
+        
+        <category>pixie</category>
+        
+        <category>spacemacs</category>
+        
+        <category>emacs</category>
+        
+        
       </item>
-    {% endfor %}
+    
+      <item>
+        <title>Mandelbrot fractal with Pixie on Ubuntu</title>
+        <description>&lt;p&gt;My friend &lt;a href=&quot;http://www.arknoon.com/&quot;&gt;Adam&lt;/a&gt; introduced me to &lt;a href=&quot;https://github.com/pixie-lang/pixie&quot;&gt;Pixie&lt;/a&gt; back in May, and I made a mental note to play with it a little bit. It was &lt;a href=&quot;https://www.youtube.com/watch?v=1AjhFZVfB9c&quot;&gt;Tim’s StrangeLoop talk&lt;/a&gt;, however, which inspired me to push all my other little timewasty things to one side to check this out.&lt;/p&gt;
+
+&lt;p&gt;The Mandelbrot example in the talk was an especially tasty bit of script to play with, and I was about to type it all out from the video when I noticed that &lt;a href=&quot;https://github.com/pixie-lang/pixie/commit/9990b235a186454e36171f84c78a0ebfb18ee5d1&quot;&gt;Stuart Hinson had beaten me to the punch&lt;/a&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;./pixie-vm examples/mandelbrot.pxi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;A first run failed with this error:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/tmp/tmp.cpp: In function ‘int main(int, char**)’:
+/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’
+  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
+                                                  ^
+/tmp/tmp.cpp:19:50: note: candidate is:
+In file included from /tmp/tmp.cpp:2:0:
+/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note: template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T)
+void DumpValue(T t)
+      ^
+/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note:   template argument deduction/substitution failed:
+/tmp/tmp.cpp: In substitution of ‘template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T) [with T = &amp;lt;anonymous enum&amp;gt;]’:
+/tmp/tmp.cpp:19:50:   required from here
+/tmp/tmp.cpp:19:50: error: ‘&amp;lt;anonymous enum&amp;gt;’ is/uses anonymous type
+  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
+                                                  ^
+/tmp/tmp.cpp:19:50: error:   trying to instantiate ‘template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T)’
+Error:  in internal function load-file
+
+in internal function load-reader
+
+Compiling: (with-config {:library SDL2, :cxx-flags [`sdl2-config --cflags`], :includes [SDL.h]} (defconst SDL_INIT_EVERYTHING) (defcfn SDL_Init) (defconst SDL_INIT_VIDEO) (defconst SDL_WINDOWPOS_UNDEFINED) (defcfn SDL_CreateWindow) (defcfn SDL_CreateRenderer) (defcfn SDL_CreateTexture) (defconst SDL_PIXELFORMAT_RGBA8888) (defconst SDL_TEXTUREACCESS_STREAMING) (defcfn SDL_UpdateTexture) (defcfn SDL_RenderClear) (defcfn SDL_RenderCopy) (defconst SDL_WINDOW_SHOWN) (defcfn SDL_RenderPresent) (defcfn SDL_LockSurface))
+in examples/mandelbrot.pxi at 10:1
+(with-config {:library &quot;SDL2&quot;
+^
+in pixie function with-config
+
+in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 212:10
+        ~(run-infer *config* @*bodies*))))
+        ^
+in pixie function run-infer
+
+in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 196:16
+        result (read-string (io/run-command cmd-str))
+              ^
+in internal function read-string
+
+RuntimeException: :pixie.stdlib/EOFWhileReadingException Unexpected EOF while reading
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The error&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’
+  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;can be worked around by ensuring the &lt;a href=&quot;https://github.com/pixie-lang/pixie/blob/master/pixie/ffi-infer.pxi&quot;&gt;FFI-infer&lt;/a&gt; runs C++ with &lt;code&gt;-std=c++0x&lt;/code&gt;, because this more recent spec lifts the limitation of unnamed types being used as template arguments.&lt;/p&gt;
+
+&lt;p&gt;Instead, I just installed &lt;a href=&quot;http://clang.llvm.org/&quot;&gt;Clang&lt;/a&gt; and set up my &lt;em&gt;alternatives&lt;/em&gt; to point to it:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install clang
+sudo update-alternatives --set c++ /usr/bin/clang++
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Et voilà!&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/mandelbrot-pixie.png&quot; alt=&quot;Mandelbrot with Pixie&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Sun, 11 Oct 2015 23:59:15 +0100</pubDate>
+        <link>http://essays.uys.io/2015/10/11/mandelbrot-fractal-with-pixie-on-ubuntu.html</link>
+        <guid isPermaLink="true">http://essays.uys.io/2015/10/11/mandelbrot-fractal-with-pixie-on-ubuntu.html</guid>
+        
+        <category>pixie</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>N business days until</title>
+        <description>&lt;p&gt;Communication at your business is key to levelling the knowledge landscape and eliminating surprises. One of my favourite tools for communicating KPIs and other important numbers are dashboards. Also, one of my favourite numbers when building a product is &lt;strong&gt;“business days until launch”&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Say today is mid September and your very important new website is launching next year January on the 11th. You can count on your fingers the full months in-between (October, November, December - that is 3) then roughly round September and January to make another month - that’s 4.&lt;/p&gt;
+
+&lt;p&gt;Now say &lt;strong&gt;“I have 4 months left until my website launches”&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;But try this: calculate the actual business days until January 11th. Cut out weekends and public holidays.&lt;/p&gt;
+
+&lt;p&gt;Now say &lt;strong&gt;“I have 79 business days left until my website launches”&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;It somehow feels like you have less time, doesn’t it?&lt;/p&gt;
+
+&lt;p&gt;This, for me, is such an important number to keep in mind, that I have created a small &lt;a href=&quot;https://github.com/opyate/daysuntil&quot;&gt;web app&lt;/a&gt; for it to load up on your dashboards.&lt;/p&gt;
+
+&lt;p&gt;Here’s an &lt;a href=&quot;http://bizdaysuntil.herokuapp.com/?year=2015&amp;amp;month=12&amp;amp;day=25&amp;amp;what=Xmas&amp;amp;size=24&amp;amp;highlight=fefe55&quot;&gt;example&lt;/a&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/bizdaysuntil.png&quot; alt=&quot;business days until Xmas&quot; /&gt;&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 17 Sep 2015 20:55:31 +0100</pubDate>
+        <link>http://essays.uys.io/2015/09/17/n-business-days-until.html</link>
+        <guid isPermaLink="true">http://essays.uys.io/2015/09/17/n-business-days-until.html</guid>
+        
+        <category>dashboards</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Can you embed a secure IFRAME inside a secure container site?</title>
+        <description>&lt;p&gt;In a &lt;a href=&quot;/2015/09/10/security-considerations-of-using-a-secure-iframe-on-an-insecure-page.html&quot;&gt;previous essay&lt;/a&gt; I discussed the security implications of hosting an IFRAME on an insecure container page. The follow-up question is whether it’s actually possible to host a secure IFRAME inside a secure container page, and if all browsers will allow this.&lt;/p&gt;
+
+&lt;p&gt;My gut feeling said that this should be possible, because the IFRAME has its own &lt;a href=&quot;http://www.w3.org/TR/html/browsers.html#nested-browsing-contexts&quot;&gt;browsing context&lt;/a&gt;. Browser support is a different question though, so I conducted a &lt;a href=&quot;https://github.com/opyate/securesecure&quot;&gt;quick experiment&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 15 Sep 2015 20:43:07 +0100</pubDate>
+        <link>http://essays.uys.io/2015/09/15/can-you-embed-a-secure-iframe-on-a-secure-site.html</link>
+        <guid isPermaLink="true">http://essays.uys.io/2015/09/15/can-you-embed-a-secure-iframe-on-a-secure-site.html</guid>
+        
+        <category>security</category>
+        
+        <category>web</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Security considerations of using a secure IFRAME on an insecure page</title>
+        <description>&lt;p&gt;In this essay I consider the information security implications around using a secure IFRAME (which, for example, hosts a payment or checkout page) on an insecure container page.&lt;/p&gt;
+
+&lt;p&gt;Some definitions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;a “secure IFRAME” is one where its &lt;code&gt;src&lt;/code&gt; attribute points to a domain over HTTPS, and any forms within the IFRAME submits to an HTTPS domain&lt;/li&gt;
+  &lt;li&gt;an “insecure container page” is a “container” because it hosts the IFRAME (the HTML code for the page will have an &lt;code&gt;&amp;lt;IFRAME&amp;gt;&lt;/code&gt; tag somewhere within it), and “insecure” because it was loaded over HTTP, not HTTPS.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;opinions-in-the-wild&quot;&gt;Opinions in the wild&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR Regardless of how secure the IFRAME is, the container site can be compromised and render said security moot.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Start typing “secure iframe” in Google, and note the suggestions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.co.uk/search?q=secure+iframe+in+non+secure+page&quot;&gt;secure iframe in non secure page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.google.co.uk/search?q=secure%20iframe%20on%20unsecure%20page&quot;&gt;secure iframe on unsecure page&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The search results point to related questions asked on the &lt;a href=&quot;http://security.stackexchange.com/&quot;&gt;Information Security Stack Exchange Q&amp;amp;A site&lt;/a&gt;, and a few blog posts by security experts have been written on the topic.&lt;/p&gt;
+
+&lt;p&gt;A non-exhaustive list of examples:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://security.stackexchange.com/questions/38317/specific-risks-of-embedding-an-https-iframe-in-an-http-page&quot;&gt;http://security.stackexchange.com/questions/38317/specific-risks-of-embedding-an-https-iframe-in-an-http-page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://security.stackexchange.com/questions/894/are-there-security-issues-with-embedding-an-https-iframe-on-an-http-page&quot;&gt;http://security.stackexchange.com/questions/894/are-there-security-issues-with-embedding-an-https-iframe-on-an-http-page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.troyhunt.com/2014/11/does-insecure-website-compromise.html&quot;&gt;http://www.troyhunt.com/2014/11/does-insecure-website-compromise.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/3144986/http-and-https-iframe&quot;&gt;http://stackoverflow.com/questions/3144986/http-and-https-iframe&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;mitm-primer&quot;&gt;MITM primer&lt;/h1&gt;
+
+&lt;p&gt;MITM attack is a “man in the middle” attack.&lt;/p&gt;
+
+&lt;p&gt;When you sit in a coffeeshop, log on to their free Wifi, and frequent your favourite online shopping fix, your requests to see products and pay for products go through many “hops” before it actually reaches the destination: your browser connects to the Wifi access point, which connects to the coffee shop’s ISP via one hop or many, which connects to a common exchange somewhere in Britain via one hops or many, which connects to an exchange somewhere in another country via one hops or many (and almost definitely via a long undersea cable), which connects to the shopping site’s web server in a datacentre somewhere (and all together now!) via one hops or many.&lt;/p&gt;
+
+&lt;p&gt;Any of these “hops” can be compromised, but the typical scenario is for the attacker to host their own version of “free Wifi” right from their laptop with a legitimate-sounding name like “FreeHub”.&lt;/p&gt;
+
+&lt;p&gt;At this point the attacker’s laptop is just one more “hop” you’re totally oblivious to when you connect to “FreeHub”, letting your surfing activity through uninterrupted.&lt;/p&gt;
+
+&lt;p&gt;However, since the attacker now have access to the data stream between you and the outside world, she can now see the data. The crucial differentiator here is HTTP VS HTTPS: if you access a site directly via HTTPS, the attacker will see unintelligeble garbage. This is A Good Thing. If you access a site via HTTP, the attacker sees everything in the clear. Even if the website subsequently redirects to HTTPS, there’s an opportunity here for the attacker to spoof a TLS certificate.&lt;/p&gt;
+
+&lt;p&gt;Since the attacker now has a clear stream of data to intercept, the attacker can also change what your web browser sees (not you, necessarily).&lt;/p&gt;
+
+&lt;h1 id=&quot;example-of-a-diy-mitm-attack&quot;&gt;Example of a DIY MITM attack&lt;/h1&gt;
+
+&lt;p&gt;I’ll explore one example of exploiting an IFRAME (secure or not!) from an insecure container page. I’ll take some shortcuts in the sense that I won’t set up a compromised Wifi access point, or run software which injects malicious code into intercepted web traffic.&lt;/p&gt;
+
+&lt;p&gt;Clone &lt;a href=&quot;https://gist.github.com/opyate/5dd65f5529d9508cf78e&quot;&gt;this gist&lt;/a&gt;, or follow these steps:&lt;/p&gt;
+
+&lt;p&gt;Create this simple index file:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;IFRAME below&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;frame1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://localhost:8000/i-dont-matter.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Create this simple form which will be loaded by the IFRAME:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;https://httpbin.org/post&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;secret&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Secret stuff here&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;submit&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Host the code locally with Python:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;python -m SimpleHTTPServer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Go to &lt;a href=&quot;http://localhost:8000&quot;&gt;http://localhost:8000&lt;/a&gt; in your browser, and submit the form. &lt;a href=&quot;http://httpbin.org/&quot;&gt;HTTPBin&lt;/a&gt; will echo back the payload.&lt;/p&gt;
+
+&lt;p&gt;Now, reload the page, but open your browser’s dev tools, and paste the code from the hack into the JavaScript console:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;form action=&amp;quot;https://httpbin.org/post&amp;quot; method=&amp;quot;POST&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;input name=&amp;quot;secret&amp;quot; placeholder=&amp;quot;Secret stuff here&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;input type=&amp;quot;submit&amp;quot; onclick=&amp;quot;return hack()&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;function hack() { alert(&amp;quot;h4x0rz&amp;quot;); }&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;/script&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;/form&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;frame1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;data:text/html;charset=utf-8,&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is the MITM attack. This is what the attacker could do with the “in-the-clear data stream” we discussed before. The attacker simply matched on a known token (like the form submit button) and injected custom code with which to do evil.&lt;/p&gt;
+
+&lt;p&gt;Submit the form, and see the side effect.&lt;/p&gt;
+
+&lt;p&gt;Note that the IFRAME’s contents have been entirely modified. It was even made to look like the original content. The fact that the IFRAME’s &lt;code&gt;src&lt;/code&gt; attribute previously loaded a secure site DOES NOT MATTER.&lt;/p&gt;
+
+&lt;p&gt;Consider yourself alerted.&lt;/p&gt;
+
+&lt;h1 id=&quot;what-evil-side-effects-are-there&quot;&gt;What evil side effects are there?&lt;/h1&gt;
+
+&lt;p&gt;OK, so the JavaScript &lt;code&gt;alert&lt;/code&gt; you just saw is just for show, but consider this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;the attacker sends the sensitive data you just submitted off to their own domain to be harvested à la &lt;a href=&quot;http://www.fastcompany.com/1715575/tunisian-government-allegedly-hacking-facebook-gmail-accounts-dissidents-and-journalists&quot;&gt;Tunisia&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;the attacker changes the delivery address for the expensive item you just bought to the unused address down their street&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;who-cares-about-my-site&quot;&gt;Who cares about my site?&lt;/h1&gt;
+
+&lt;p&gt;Your insecure site might’nt accept sensitive input like payment details or sell valuable items, but your insecure site might be frequented by someone who does.&lt;/p&gt;
+
+&lt;p&gt;An attacker might know that a high profile (read: hack-worthy) individual called Bob Millionaire frequents your insecure pet discussion website. Let’s imagine for a second your forum software requires a login. &lt;strong&gt;Your insecure website has now become a target.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The attacker will now trivially sniff for Bob Millionaire’s password on your insecure website, which she can replay against other more lucrative websites, if we can &lt;a href=&quot;http://media.ofcom.org.uk/news/2013/uk-adults-taking-online-password-security-risks/&quot;&gt;presume that Bob Millionaire re-uses his passwords&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Even if you’re just the third party who owns the domain the IFRAME points to, you have to &lt;strong&gt;strongly consider if you want to be associated with the bad press which comes with your client’s website being exploited&lt;/strong&gt; and having the IFRAME which was destined for your content being on the receiving end.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-solution&quot;&gt;The solution&lt;/h1&gt;
+
+&lt;p&gt;Can we get to a better place by mandating all container sites to enforce TLS? I think we can. But this will just be a better place, not the ultimate secure place.&lt;/p&gt;
+
+&lt;p&gt;There’s a sliding scale, you see.&lt;/p&gt;
+
+&lt;p&gt;On the paranoid end you can presume every device and every network is compromised. No amount of TLS will help you. You can trust your own laptop as much as you do the web browser running on the old XP PC down the Internet cafe: you’ll think twice about what you do online, and where you do it. (yes, a modified version of any web browser can show a green padlock for anything)&lt;/p&gt;
+
+&lt;p&gt;On the naive end you can presume that you live in a free country, with devices built in secured facilities by known brands, and that the websites you frequent are hosted in secure datacentres, managed by security veterans who can be trusted.&lt;/p&gt;
+
+&lt;p&gt;Choose your position on the scale, and accept the risk that’s forthcoming.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Sep 2015 14:05:45 +0100</pubDate>
+        <link>http://essays.uys.io/2015/09/10/security-considerations-of-using-a-secure-iframe-on-an-insecure-page.html</link>
+        <guid isPermaLink="true">http://essays.uys.io/2015/09/10/security-considerations-of-using-a-secure-iframe-on-an-insecure-page.html</guid>
+        
+        <category>security</category>
+        
+        <category>web</category>
+        
+        
+      </item>
+    
   </channel>
 </rss>

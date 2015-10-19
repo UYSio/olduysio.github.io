@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="globalsign-domain-verification" content="ymX0NUSgRv8E1Waz2FeiQ-x7GoJOGzKydkbWi9zINZ">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Mandelbrot fractal with Pixie on Ubuntu</title>
+  <meta name="description" content="My friend Adam introduced me to Pixie back in May, and I made a mental note to play with it a little bit. It was Tim’s StrangeLoop talk, however, which inspi...">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://essays.uys.io/2015/10/11/mandelbrot-fractal-with-pixie-on-ubuntu.html">
+  <link rel="alternate" type="application/rss+xml" title="Unleash Your Server" href="http://essays.uys.io/feed.xml" />
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">
+      <img src="/assets/logo.png" alt="Unleash Your Server">
+    </a>
+
+    <nav class="site-nav">
+      <div class="trigger">
+        
+          
+        
+          
+          <a class="page-link" href="/archive/index.html">Archive</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Mandelbrot fractal with Pixie on Ubuntu</h1>
+    <p class="post-meta">
+      2015-10-11
+      
+      
+      
+        under
+        
+          <a class="post-tag pixie" href="http://essays.uys.io/tags/#pixie">pixie</a>
+        
+      
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>My friend <a href="http://www.arknoon.com/">Adam</a> introduced me to <a href="https://github.com/pixie-lang/pixie">Pixie</a> back in May, and I made a mental note to play with it a little bit. It was <a href="https://www.youtube.com/watch?v=1AjhFZVfB9c">Tim’s StrangeLoop talk</a>, however, which inspired me to push all my other little timewasty things to one side to check this out.</p>
+
+<p>The Mandelbrot example in the talk was an especially tasty bit of script to play with, and I was about to type it all out from the video when I noticed that <a href="https://github.com/pixie-lang/pixie/commit/9990b235a186454e36171f84c78a0ebfb18ee5d1">Stuart Hinson had beaten me to the punch</a>.</p>
+
+<pre><code>./pixie-vm examples/mandelbrot.pxi
+</code></pre>
+
+<p>A first run failed with this error:</p>
+
+<pre><code>/tmp/tmp.cpp: In function ‘int main(int, char**)’:
+/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’
+  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
+                                                  ^
+/tmp/tmp.cpp:19:50: note: candidate is:
+In file included from /tmp/tmp.cpp:2:0:
+/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note: template&lt;class T&gt; void PixieChecker::DumpValue(T)
+void DumpValue(T t)
+      ^
+/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note:   template argument deduction/substitution failed:
+/tmp/tmp.cpp: In substitution of ‘template&lt;class T&gt; void PixieChecker::DumpValue(T) [with T = &lt;anonymous enum&gt;]’:
+/tmp/tmp.cpp:19:50:   required from here
+/tmp/tmp.cpp:19:50: error: ‘&lt;anonymous enum&gt;’ is/uses anonymous type
+  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
+                                                  ^
+/tmp/tmp.cpp:19:50: error:   trying to instantiate ‘template&lt;class T&gt; void PixieChecker::DumpValue(T)’
+Error:  in internal function load-file
+
+in internal function load-reader
+
+Compiling: (with-config {:library SDL2, :cxx-flags [`sdl2-config --cflags`], :includes [SDL.h]} (defconst SDL_INIT_EVERYTHING) (defcfn SDL_Init) (defconst SDL_INIT_VIDEO) (defconst SDL_WINDOWPOS_UNDEFINED) (defcfn SDL_CreateWindow) (defcfn SDL_CreateRenderer) (defcfn SDL_CreateTexture) (defconst SDL_PIXELFORMAT_RGBA8888) (defconst SDL_TEXTUREACCESS_STREAMING) (defcfn SDL_UpdateTexture) (defcfn SDL_RenderClear) (defcfn SDL_RenderCopy) (defconst SDL_WINDOW_SHOWN) (defcfn SDL_RenderPresent) (defcfn SDL_LockSurface))
+in examples/mandelbrot.pxi at 10:1
+(with-config {:library "SDL2"
+^
+in pixie function with-config
+
+in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 212:10
+        ~(run-infer *config* @*bodies*))))
+        ^
+in pixie function run-infer
+
+in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 196:16
+        result (read-string (io/run-command cmd-str))
+              ^
+in internal function read-string
+
+RuntimeException: :pixie.stdlib/EOFWhileReadingException Unexpected EOF while reading
+</code></pre>
+
+<p>The error</p>
+
+<pre><code>/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’
+  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
+</code></pre>
+
+<p>can be worked around by ensuring the <a href="https://github.com/pixie-lang/pixie/blob/master/pixie/ffi-infer.pxi">FFI-infer</a> runs C++ with <code>-std=c++0x</code>, because this more recent spec lifts the limitation of unnamed types being used as template arguments.</p>
+
+<p>Instead, I just installed <a href="http://clang.llvm.org/">Clang</a> and set up my <em>alternatives</em> to point to it:</p>
+
+<pre><code>sudo apt-get install clang
+sudo update-alternatives --set c++ /usr/bin/clang++
+</code></pre>
+
+<p>Et voilà!</p>
+
+<p><img src="/assets/mandelbrot-pixie.png" alt="Mandelbrot with Pixie" /></p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+</footer>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+  </body>
+
+</html>

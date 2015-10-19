@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="globalsign-domain-verification" content="ymX0NUSgRv8E1Waz2FeiQ-x7GoJOGzKydkbWi9zINZ">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>A Spacemacs layer for Pixie</title>
+  <meta name="description" content="A major mode for Pixie already exists, but I would like to use it in evil mode from Spacemacs. Hence, a custom layer.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://essays.uys.io/2015/10/17/spacemacs-layer-for-pixie.html">
+  <link rel="alternate" type="application/rss+xml" title="Unleash Your Server" href="http://essays.uys.io/feed.xml" />
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">
+      <img src="/assets/logo.png" alt="Unleash Your Server">
+    </a>
+
+    <nav class="site-nav">
+      <div class="trigger">
+        
+          
+        
+          
+          <a class="page-link" href="/archive/index.html">Archive</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">A Spacemacs layer for Pixie</h1>
+    <p class="post-meta">
+      2015-10-17
+      
+      
+      
+        under
+        
+          <a class="post-tag pixie" href="http://essays.uys.io/tags/#pixie">pixie</a>
+        
+          <a class="post-tag spacemacs" href="http://essays.uys.io/tags/#spacemacs">spacemacs</a>
+        
+          <a class="post-tag emacs" href="http://essays.uys.io/tags/#emacs">emacs</a>
+        
+      
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>A major mode for <a href="https://github.com/pixie-lang/pixie">Pixie</a> already <a href="https://github.com/johnwalker/pixie-mode">exists</a>, but I would like to use it in evil mode from <a href="https://github.com/syl20bnr/spacemacs">Spacemacs</a>. Hence, a <a href="https://github.com/UYSio/pixie-spacemacs-layer">custom layer</a>.</p>
+
+<p>I repeat the steps I took here in a mini tutorial format.</p>
+
+<h1 id="create-a-custom-layer-for-spacemacs">Create a custom layer for Spacemacs</h1>
+
+<p>Start with creating the layer from within Spacemacs:</p>
+
+<pre><code>&lt;SPC&gt; : configuration-layer/create-layer &lt;RET&gt;
+</code></pre>
+
+<p>Press <code>&lt;RET&gt;</code> again to create the layer in the default directory <code>$HOME/.emacs.d/private</code>.</p>
+
+<p>Choose a layer name, e.g. <code>pixie</code>.</p>
+
+<p>Spacemacs then throws you into the <a href="https://github.com/syl20bnr/spacemacs/blob/696f2d461a81b2c0640ae7da113edf1374050ecd/core/templates/packages.template">packages.el</a> for your new layer.</p>
+
+<p>Now is a good time to study <a href="https://github.com/syl20bnr/spacemacs/blob/master/doc/LAYERS.org">layers</a>, but the gist is this:</p>
+
+<ul>
+  <li>hook in the modes you’re layering in <code>(setq &lt;your-layer&gt;-packages ...)</code></li>
+  <li>set the key combinations for your <a href="https://github.com/syl20bnr/spacemacs/blob/master/doc/DOCUMENTATION.org#evil-leader">Evil Leader</a> in the <code>(defun &lt;your-layer&gt;/init-&lt;your-layer&gt; () ...)</code> form</li>
+  <li>optionally define custom commands here and bind to them</li>
+</ul>
+
+<p>PS The Evil Leader in Spacemacs is <code>SPC</code> (YES! that’s where Spacemacs gets its name from).</p>
+
+<h1 id="result">Result</h1>
+
+<p>Here’s what I came up with for Pixie. At the moment, it offers bindings to start the REPL, and eval s-expressions (and an option to jump to the REPL after evaluation).</p>
+
+<div class="highlight"><pre><code class="language-elisp" data-lang="elisp"><span class="c1">;;; packages.el --- pixie Layer packages File for Spacemacs</span>
+<span class="c1">;;</span>
+<span class="c1">;; Copyright (c) 2012-2014 Sylvain Benner</span>
+<span class="c1">;; Copyright (c) 2014-2015 Sylvain Benner &amp; Contributors</span>
+<span class="c1">;;</span>
+<span class="c1">;; Author: Sylvain Benner &lt;sylvain.benner@gmail.com&gt;</span>
+<span class="c1">;; URL: https://github.com/syl20bnr/spacemacs</span>
+<span class="c1">;;</span>
+<span class="c1">;; This file is not part of GNU Emacs.</span>
+<span class="c1">;;</span>
+<span class="c1">;;; License: GPLv3</span>
+
+<span class="c1">;; List of all packages to install and/or initialize. Built-in packages</span>
+<span class="c1">;; which require an initialization must be listed explicitly in the list.</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">pixie-packages</span>
+    <span class="o">&#39;</span><span class="p">(</span>
+    <span class="c1">;; package names go here</span>
+    <span class="nv">inf-clojure</span>
+    <span class="nv">pixie-mode</span>
+    <span class="p">))</span>
+
+<span class="c1">;; List of packages to exclude.</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">pixie-excluded-packages</span> <span class="o">&#39;</span><span class="p">())</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">pixie/post-init-inf-clojure</span> <span class="p">()</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;pixie-mode-hook</span> <span class="ss">&#39;inf-clojure-minor-mode</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">pixie/init-pixie-mode</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">use-package</span> <span class="nv">pixie-mode</span>
+    <span class="ss">:defer</span> <span class="no">t</span>
+    <span class="ss">:config</span>
+    <span class="p">(</span><span class="k">progn</span>
+      <span class="p">(</span><span class="nb">defun</span> <span class="nv">spacemacs/pixie-eval-and-switch-to-repl</span> <span class="p">()</span>
+        <span class="s">&quot;Call `inf-clojure-eval-last-sexp&#39; and switch to REPL buffer in `insert state&#39;&quot;</span>
+        <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">inf-clojure-eval-last-sexp</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">inf-clojure-switch-to-repl</span> <span class="no">t</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">evil-insert-state</span><span class="p">))</span>
+
+      <span class="p">(</span><span class="nv">evil-leader/set-key-for-mode</span> <span class="ss">&#39;pixie-mode</span>
+        <span class="c1">;; REPL</span>
+        <span class="s">&quot;msi&quot;</span> <span class="ss">&#39;inf-clojure-switch-to-repl</span>
+        <span class="s">&quot;msb&quot;</span> <span class="ss">&#39;inf-clojure-eval-last-sexp</span>
+        <span class="s">&quot;msB&quot;</span> <span class="ss">&#39;spacemacs/pixie-eval-and-switch-to-repl</span><span class="p">))))</span>
+
+<span class="c1">;; For each package, define a function pixie/init-&lt;package-name&gt;</span>
+<span class="c1">;;</span>
+<span class="c1">;; (defun pixie/init-my-package ()</span>
+<span class="c1">;;   &quot;Initialize my package&quot;</span>
+<span class="c1">;;   )</span>
+<span class="c1">;;</span>
+<span class="c1">;; Often the body of an initialize function uses `use-package&#39;</span>
+<span class="c1">;; For more info on `use-package&#39;, see readme:</span>
+<span class="c1">;; https://github.com/jwiegley/use-package</span></code></pre></div>
+
+<p>It’s by no means complete, and I plan to implement basic functionality involving navigation, documentation, tests (Pixie test frameworks permitting), and evaluation of more forms.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+</footer>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+  </body>
+
+</html>
