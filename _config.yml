@@ -16,6 +16,6 @@ kramdown:
   input: GFM
 
 # options
-safe: true
+safe: false
 timezone: Europe/London
 encoding: utf-8
