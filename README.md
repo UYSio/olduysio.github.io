@@ -19,7 +19,6 @@ And then:
     jekyll build
     cp -R _site/* ../uysio.github.io
     pushd ../uysio.github.io
-    git add .
-    git commit -m "new post"
+    git add . && git commit -m "UYSio/uysio.github.io-src updated"
     git push origin master
     popd

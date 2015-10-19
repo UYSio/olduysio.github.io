@@ -89,58 +89,56 @@
 
 <p>A first run failed with this error:</p>
 
-<pre><code>/tmp/tmp.cpp: In function ‘int main(int, char**)’:
-/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’
-  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
-                                                  ^
-/tmp/tmp.cpp:19:50: note: candidate is:
-In file included from /tmp/tmp.cpp:2:0:
-/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note: template&lt;class T&gt; void PixieChecker::DumpValue(T)
-void DumpValue(T t)
-      ^
-/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note:   template argument deduction/substitution failed:
-/tmp/tmp.cpp: In substitution of ‘template&lt;class T&gt; void PixieChecker::DumpValue(T) [with T = &lt;anonymous enum&gt;]’:
-/tmp/tmp.cpp:19:50:   required from here
-/tmp/tmp.cpp:19:50: error: ‘&lt;anonymous enum&gt;’ is/uses anonymous type
-  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
-                                                  ^
-/tmp/tmp.cpp:19:50: error:   trying to instantiate ‘template&lt;class T&gt; void PixieChecker::DumpValue(T)’
-Error:  in internal function load-file
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">/tmp/tmp.cpp: In function ‘int main(int, char**)’:</span>
+<span class="go">/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’</span>
+<span class="go">  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); </span>
+<span class="go">                                                  ^</span>
+<span class="go">/tmp/tmp.cpp:19:50: note: candidate is:</span>
+<span class="go">In file included from /tmp/tmp.cpp:2:0:</span>
+<span class="go">/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note: template&lt;class T&gt; void PixieChecker::DumpValue(T)</span>
+<span class="go">void DumpValue(T t)</span>
+<span class="go">      ^</span>
+<span class="go">/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note:   template argument deduction/substitution failed:</span>
+<span class="go">/tmp/tmp.cpp: In substitution of ‘template&lt;class T&gt; void PixieChecker::DumpValue(T) [with T = &lt;anonymous enum&gt;]’:</span>
+<span class="go">/tmp/tmp.cpp:19:50:   required from here</span>
+<span class="go">/tmp/tmp.cpp:19:50: error: ‘&lt;anonymous enum&gt;’ is/uses anonymous type</span>
+<span class="go">  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); </span>
+<span class="go">                                                  ^</span>
+<span class="go">/tmp/tmp.cpp:19:50: error:   trying to instantiate ‘template&lt;class T&gt; void PixieChecker::DumpValue(T)’</span>
+<span class="go">Error:  in internal function load-file</span>
 
-in internal function load-reader
+<span class="go">in internal function load-reader</span>
 
-Compiling: (with-config {:library SDL2, :cxx-flags [`sdl2-config --cflags`], :includes [SDL.h]} (defconst SDL_INIT_EVERYTHING) (defcfn SDL_Init) (defconst SDL_INIT_VIDEO) (defconst SDL_WINDOWPOS_UNDEFINED) (defcfn SDL_CreateWindow) (defcfn SDL_CreateRenderer) (defcfn SDL_CreateTexture) (defconst SDL_PIXELFORMAT_RGBA8888) (defconst SDL_TEXTUREACCESS_STREAMING) (defcfn SDL_UpdateTexture) (defcfn SDL_RenderClear) (defcfn SDL_RenderCopy) (defconst SDL_WINDOW_SHOWN) (defcfn SDL_RenderPresent) (defcfn SDL_LockSurface))
-in examples/mandelbrot.pxi at 10:1
-(with-config {:library "SDL2"
-^
-in pixie function with-config
+<span class="go">Compiling: (with-config {:library SDL2, :cxx-flags [`sdl2-config --cflags`], :includes [SDL.h]} (defconst SDL_INIT_EVERYTHING) (defcfn SDL_Init) (defconst SDL_INIT_VIDEO) (defconst SDL_WINDOWPOS_UNDEFINED) (defcfn SDL_CreateWindow) (defcfn SDL_CreateRenderer) (defcfn SDL_CreateTexture) (defconst SDL_PIXELFORMAT_RGBA8888) (defconst SDL_TEXTUREACCESS_STREAMING) (defcfn SDL_UpdateTexture) (defcfn SDL_RenderClear) (defcfn SDL_RenderCopy) (defconst SDL_WINDOW_SHOWN) (defcfn SDL_RenderPresent) (defcfn SDL_LockSurface))</span>
+<span class="go">in examples/mandelbrot.pxi at 10:1</span>
+<span class="go">(with-config {:library &quot;SDL2&quot;</span>
+<span class="go">^</span>
+<span class="go">in pixie function with-config</span>
 
-in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 212:10
-        ~(run-infer *config* @*bodies*))))
-        ^
-in pixie function run-infer
+<span class="go">in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 212:10</span>
+<span class="go">        ~(run-infer *config* @*bodies*))))</span>
+<span class="go">        ^</span>
+<span class="go">in pixie function run-infer</span>
 
-in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 196:16
-        result (read-string (io/run-command cmd-str))
-              ^
-in internal function read-string
+<span class="go">in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 196:16</span>
+<span class="go">        result (read-string (io/run-command cmd-str))</span>
+<span class="go">              ^</span>
+<span class="go">in internal function read-string</span>
 
-RuntimeException: :pixie.stdlib/EOFWhileReadingException Unexpected EOF while reading
-</code></pre>
+<span class="go">RuntimeException: :pixie.stdlib/EOFWhileReadingException Unexpected EOF while reading</span>
+<span class="go">&lt;/pre&gt;</span></code></pre></div>
 
 <p>The error</p>
 
-<pre><code>/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’
-  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
-</code></pre>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’</span>
+<span class="go">  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888);</span></code></pre></div>
 
 <p>can be worked around by ensuring the <a href="https://github.com/pixie-lang/pixie/blob/master/pixie/ffi-infer.pxi">FFI-infer</a> runs C++ with <code>-std=c++0x</code>, because this more recent spec lifts the limitation of unnamed types being used as template arguments.</p>
 
 <p>Instead, I just installed <a href="http://clang.llvm.org/">Clang</a> and set up my <em>alternatives</em> to point to it:</p>
 
-<pre><code>sudo apt-get install clang
-sudo update-alternatives --set c++ /usr/bin/clang++
-</code></pre>
+<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo apt-get install clang</span>
+<span class="go">sudo update-alternatives --set c++ /usr/bin/clang++</span></code></pre></div>
 
 <p>Et voilà!</p>
 

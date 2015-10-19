@@ -6,8 +6,8 @@
 </description>
     <link>http://essays.uys.io/</link>
     <atom:link href="http://essays.uys.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 19 Oct 2015 16:51:22 +0100</pubDate>
-    <lastBuildDate>Mon, 19 Oct 2015 16:51:22 +0100</lastBuildDate>
+    <pubDate>Mon, 19 Oct 2015 17:22:22 +0100</pubDate>
+    <lastBuildDate>Mon, 19 Oct 2015 17:22:22 +0100</lastBuildDate>
     <generator>Jekyll v2.5.3</generator>
     
       <item>
@@ -20,8 +20,7 @@
 
 &lt;p&gt;Start with creating the layer from within Spacemacs:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;SPC&amp;gt; : configuration-layer/create-layer &amp;lt;RET&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;&amp;lt;SPC&amp;gt; : configuration-layer/create-layer &amp;lt;RET&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Press &lt;code&gt;&amp;lt;RET&amp;gt;&lt;/code&gt; again to create the layer in the default directory &lt;code&gt;$HOME/.emacs.d/private&lt;/code&gt;.&lt;/p&gt;
 
@@ -124,58 +123,56 @@
 
 &lt;p&gt;A first run failed with this error:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;/tmp/tmp.cpp: In function ‘int main(int, char**)’:
-/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’
-  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
-                                                  ^
-/tmp/tmp.cpp:19:50: note: candidate is:
-In file included from /tmp/tmp.cpp:2:0:
-/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note: template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T)
-void DumpValue(T t)
-      ^
-/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note:   template argument deduction/substitution failed:
-/tmp/tmp.cpp: In substitution of ‘template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T) [with T = &amp;lt;anonymous enum&amp;gt;]’:
-/tmp/tmp.cpp:19:50:   required from here
-/tmp/tmp.cpp:19:50: error: ‘&amp;lt;anonymous enum&amp;gt;’ is/uses anonymous type
-  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
-                                                  ^
-/tmp/tmp.cpp:19:50: error:   trying to instantiate ‘template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T)’
-Error:  in internal function load-file
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp: In function ‘int main(int, char**)’:&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); &lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;                                                  ^&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50: note: candidate is:&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;In file included from /tmp/tmp.cpp:2:0:&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note: template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T)&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;void DumpValue(T t)&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;      ^&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/home/opyate/Code/pixie/pixie/PixieChecker.hpp:432:6: note:   template argument deduction/substitution failed:&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp: In substitution of ‘template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T) [with T = &amp;lt;anonymous enum&amp;gt;]’:&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50:   required from here&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50: error: ‘&amp;lt;anonymous enum&amp;gt;’ is/uses anonymous type&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); &lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;                                                  ^&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50: error:   trying to instantiate ‘template&amp;lt;class T&amp;gt; void PixieChecker::DumpValue(T)’&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;Error:  in internal function load-file&lt;/span&gt;
 
-in internal function load-reader
+&lt;span class=&quot;go&quot;&gt;in internal function load-reader&lt;/span&gt;
 
-Compiling: (with-config {:library SDL2, :cxx-flags [`sdl2-config --cflags`], :includes [SDL.h]} (defconst SDL_INIT_EVERYTHING) (defcfn SDL_Init) (defconst SDL_INIT_VIDEO) (defconst SDL_WINDOWPOS_UNDEFINED) (defcfn SDL_CreateWindow) (defcfn SDL_CreateRenderer) (defcfn SDL_CreateTexture) (defconst SDL_PIXELFORMAT_RGBA8888) (defconst SDL_TEXTUREACCESS_STREAMING) (defcfn SDL_UpdateTexture) (defcfn SDL_RenderClear) (defcfn SDL_RenderCopy) (defconst SDL_WINDOW_SHOWN) (defcfn SDL_RenderPresent) (defcfn SDL_LockSurface))
-in examples/mandelbrot.pxi at 10:1
-(with-config {:library &quot;SDL2&quot;
-^
-in pixie function with-config
+&lt;span class=&quot;go&quot;&gt;Compiling: (with-config {:library SDL2, :cxx-flags [`sdl2-config --cflags`], :includes [SDL.h]} (defconst SDL_INIT_EVERYTHING) (defcfn SDL_Init) (defconst SDL_INIT_VIDEO) (defconst SDL_WINDOWPOS_UNDEFINED) (defcfn SDL_CreateWindow) (defcfn SDL_CreateRenderer) (defcfn SDL_CreateTexture) (defconst SDL_PIXELFORMAT_RGBA8888) (defconst SDL_TEXTUREACCESS_STREAMING) (defcfn SDL_UpdateTexture) (defcfn SDL_RenderClear) (defcfn SDL_RenderCopy) (defconst SDL_WINDOW_SHOWN) (defcfn SDL_RenderPresent) (defcfn SDL_LockSurface))&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;in examples/mandelbrot.pxi at 10:1&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;(with-config {:library &amp;quot;SDL2&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;^&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;in pixie function with-config&lt;/span&gt;
 
-in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 212:10
-        ~(run-infer *config* @*bodies*))))
-        ^
-in pixie function run-infer
+&lt;span class=&quot;go&quot;&gt;in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 212:10&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        ~(run-infer *config* @*bodies*))))&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        ^&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;in pixie function run-infer&lt;/span&gt;
 
-in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 196:16
-        result (read-string (io/run-command cmd-str))
-              ^
-in internal function read-string
+&lt;span class=&quot;go&quot;&gt;in /home/opyate/Code/pixie/pixie/ffi-infer.pxi at 196:16&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;        result (read-string (io/run-command cmd-str))&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;              ^&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;in internal function read-string&lt;/span&gt;
 
-RuntimeException: :pixie.stdlib/EOFWhileReadingException Unexpected EOF while reading
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;go&quot;&gt;RuntimeException: :pixie.stdlib/EOFWhileReadingException Unexpected EOF while reading&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;&amp;lt;/pre&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The error&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’
-  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); 
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;can be worked around by ensuring the &lt;a href=&quot;https://github.com/pixie-lang/pixie/blob/master/pixie/ffi-infer.pxi&quot;&gt;FFI-infer&lt;/a&gt; runs C++ with &lt;code&gt;-std=c++0x&lt;/code&gt;, because this more recent spec lifts the limitation of unnamed types being used as template arguments.&lt;/p&gt;
 
 &lt;p&gt;Instead, I just installed &lt;a href=&quot;http://clang.llvm.org/&quot;&gt;Clang&lt;/a&gt; and set up my &lt;em&gt;alternatives&lt;/em&gt; to point to it:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;sudo apt-get install clang
-sudo update-alternatives --set c++ /usr/bin/clang++
-&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install clang&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;sudo update-alternatives --set c++ /usr/bin/clang++&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Et voilà!&lt;/p&gt;
 
