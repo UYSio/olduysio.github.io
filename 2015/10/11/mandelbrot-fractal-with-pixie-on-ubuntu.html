@@ -33,7 +33,19 @@
           
         
           
-          <a class="page-link" href="/archive/index.html">Archive</a>
+          <a class="page-link" href="/archive/">Archive</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
           
         
           
@@ -89,7 +101,7 @@
 
 <p>A first run failed with this error:</p>
 
-<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">/tmp/tmp.cpp: In function ‘int main(int, char**)’:</span>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">/tmp/tmp.cpp: In function ‘int main(int, char**)’:</span>
 <span class="go">/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’</span>
 <span class="go">  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); </span>
 <span class="go">                                                  ^</span>
@@ -126,19 +138,19 @@
 <span class="go">in internal function read-string</span>
 
 <span class="go">RuntimeException: :pixie.stdlib/EOFWhileReadingException Unexpected EOF while reading</span>
-<span class="go">&lt;/pre&gt;</span></code></pre></div>
+<span class="go">&lt;/pre&gt;</span></code></pre></figure>
 
 <p>The error</p>
 
-<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’</span>
-<span class="go">  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888);</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&lt;anonymous enum&gt;)’</span>
+<span class="go">  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); </span></code></pre></figure>
 
 <p>can be worked around by ensuring the <a href="https://github.com/pixie-lang/pixie/blob/master/pixie/ffi-infer.pxi">FFI-infer</a> runs C++ with <code>-std=c++0x</code>, because this more recent spec lifts the limitation of unnamed types being used as template arguments.</p>
 
 <p>Instead, I just installed <a href="http://clang.llvm.org/">Clang</a> and set up my <em>alternatives</em> to point to it:</p>
 
-<div class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo apt-get install clang</span>
-<span class="go">sudo update-alternatives --set c++ /usr/bin/clang++</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-console" data-lang="console"><span class="go">sudo apt-get install clang</span>
+<span class="go">sudo update-alternatives --set c++ /usr/bin/clang++</span></code></pre></figure>
 
 <p>Et voilà!</p>
 

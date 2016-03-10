@@ -33,7 +33,19 @@
           
         
           
-          <a class="page-link" href="/archive/index.html">Archive</a>
+          <a class="page-link" href="/archive/">Archive</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
           
         
           
@@ -135,15 +147,15 @@
 
 <p>Create this simple index file:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p&gt;</span>IFRAME below<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;iframe</span> <span class="na">id=</span><span class="s">&quot;frame1&quot;</span> <span class="na">src=</span><span class="s">&quot;http://localhost:8000/i-dont-matter.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;p&gt;</span>IFRAME below<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;iframe</span> <span class="na">id=</span><span class="s">&quot;frame1&quot;</span> <span class="na">src=</span><span class="s">&quot;http://localhost:8000/i-dont-matter.html&quot;</span><span class="nt">&gt;&lt;/iframe&gt;</span></code></pre></figure>
 
 <p>Create this simple form which will be loaded by the IFRAME:</p>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;https://httpbin.org/post&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span><span class="nt">&gt;</span>
+<figure class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">&quot;https://httpbin.org/post&quot;</span> <span class="na">method=</span><span class="s">&quot;POST&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;input</span> <span class="na">name=</span><span class="s">&quot;secret&quot;</span> <span class="na">placeholder=</span><span class="s">&quot;Secret stuff here&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span><span class="nt">&gt;</span>
-<span class="nt">&lt;/form&gt;</span></code></pre></div>
+<span class="nt">&lt;/form&gt;</span></code></pre></figure>
 
 <p>Host the code locally with Python:</p>
 
@@ -154,14 +166,14 @@
 
 <p>Now, reload the page, but open your browser’s dev tools, and paste the code from the hack into the JavaScript console:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">contents</span> <span class="o">=</span> <span class="s1">&#39;&lt;form action=&quot;https://httpbin.org/post&quot; method=&quot;POST&quot;&gt;&#39;</span><span class="p">;</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">contents</span> <span class="o">=</span> <span class="s1">&#39;&lt;form action=&quot;https://httpbin.org/post&quot; method=&quot;POST&quot;&gt;&#39;</span><span class="p">;</span>
 <span class="nx">contents</span> <span class="o">+=</span> <span class="s1">&#39;&lt;input name=&quot;secret&quot; placeholder=&quot;Secret stuff here&quot;&gt;&#39;</span><span class="p">;</span>
 <span class="nx">contents</span> <span class="o">+=</span> <span class="s1">&#39;&lt;input type=&quot;submit&quot; onclick=&quot;return hack()&quot;&gt;&#39;</span><span class="p">;</span>
 <span class="nx">contents</span> <span class="o">+=</span> <span class="s1">&#39;&lt;script type=&quot;text/javascript&quot;&gt;&#39;</span><span class="p">;</span>
 <span class="nx">contents</span> <span class="o">+=</span> <span class="s1">&#39;function hack() { alert(&quot;h4x0rz&quot;); }&#39;</span><span class="p">;</span>
 <span class="nx">contents</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/script&gt;&#39;</span><span class="p">;</span>
 <span class="nx">contents</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/form&gt;&#39;</span><span class="p">;</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;frame1&#39;</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;data:text/html;charset=utf-8,&quot;</span> <span class="o">+</span> <span class="nx">escape</span><span class="p">(</span><span class="nx">contents</span><span class="p">);</span></code></pre></div>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;frame1&#39;</span><span class="p">).</span><span class="nx">src</span> <span class="o">=</span> <span class="s2">&quot;data:text/html;charset=utf-8,&quot;</span> <span class="o">+</span> <span class="nx">escape</span><span class="p">(</span><span class="nx">contents</span><span class="p">);</span></code></pre></figure>
 
 <p>This is the MITM attack. This is what the attacker could do with the “in-the-clear data stream” we discussed before. The attacker simply matched on a known token (like the form submit button) and injected custom code with which to do evil.</p>
 

@@ -6,9 +6,73 @@
 </description>
     <link>http://essays.uys.io/</link>
     <atom:link href="http://essays.uys.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 19 Oct 2015 17:22:22 +0100</pubDate>
-    <lastBuildDate>Mon, 19 Oct 2015 17:22:22 +0100</lastBuildDate>
-    <generator>Jekyll v2.5.3</generator>
+    <pubDate>Thu, 10 Mar 2016 23:12:21 +0000</pubDate>
+    <lastBuildDate>Thu, 10 Mar 2016 23:12:21 +0000</lastBuildDate>
+    <generator>Jekyll v3.0.1</generator>
+    
+      <item>
+        <title>Docker this, Docker that.</title>
+        <description>&lt;p&gt;Ever since &lt;a href=&quot;https://fir.sh/&quot;&gt;Ben Firshman&lt;/a&gt; introduced us to his &lt;a href=&quot;http://www.fig.sh/&quot;&gt;side project&lt;/a&gt; back in 2013 at the Land Registry, I’ve been hooked on Docker.&lt;/p&gt;
+
+&lt;p&gt;Also, since treating myself to a new HDD for Xmas and installing Arch Linux, I felt the need to keep concerns separate, almost like &lt;a href=&quot;http://appimage.org/&quot;&gt;AppImage&lt;/a&gt; promises to do. Docker to the rescue, naturally.&lt;/p&gt;
+
+&lt;p&gt;Here follows a non-exhaustive list of cool apps I’ve Dockerised or helped Dockerise.&lt;/p&gt;
+
+&lt;h1 id=&quot;unity3d&quot;&gt;Unity3D&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/opyate/unity3d&quot;&gt;opyate/unity3d&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/tommyoshaw&quot;&gt;Thomas Shaw&lt;/a&gt; for the head start. More fixes will come once I start Android/WebGL integration, but otherwise I’m really excited to use it more. In fact, I told &lt;a href=&quot;https://github.com/rosejn&quot;&gt;someone&lt;/a&gt; for the first time today what my game idea is all about, and he nodded appreciatively. Note to self: enough &lt;a href=&quot;http://tynansylvester.com/book/&quot;&gt;reading&lt;/a&gt;, and more coding!&lt;/p&gt;
+
+&lt;h1 id=&quot;android-studio&quot;&gt;Android Studio&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/tddpirate/androiddocker&quot;&gt;tddpirate/androiddocker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/tddpirate&quot;&gt;Omer Zak&lt;/a&gt; for the head start. I discovered this repo 2 days after Omer made it public, and basically an email to-and-fro ensued, in which I suggested this and that. Apart from wiring the IoT, I think being able to program the one thing you have with you all day is quite valuable.&lt;/p&gt;
+
+&lt;h1 id=&quot;github-leaderboard&quot;&gt;Github Leaderboard&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/opyate/github-leaderboard-docker&quot;&gt;opyate/github-leaderboard-docker&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Thanks to &lt;a href=&quot;https://github.com/eugef&quot;&gt;Eugene Fidelin&lt;/a&gt; for &lt;a href=&quot;https://github.com/eugef/github-leaderboard&quot;&gt;Github Leaderboard&lt;/a&gt;! It’s Node/NPM, so I just had to contain(erise) this. (Be fhssre gur jengu bs n gubhfnaq yvggyr onqyl-ervairagrq jurryf yvggrevat lbhe uneq qevir…)&lt;/p&gt;
+
+&lt;p&gt;Turns out I had a good week.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/gl.png&quot; alt=&quot;Github Leaderboard&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Thu, 10 Mar 2016 21:47:16 +0000</pubDate>
+        <link>http://essays.uys.io/2016/03/10/docker-this-docker-that.html</link>
+        <guid isPermaLink="true">http://essays.uys.io/2016/03/10/docker-this-docker-that.html</guid>
+        
+        <category>docker</category>
+        
+        <category>unity3d</category>
+        
+        <category>android</category>
+        
+        <category>github</category>
+        
+        
+      </item>
+    
+      <item>
+        <title>Ajax: when was your first time? &amp;#8482;</title>
+        <description>&lt;p&gt;I reminisced with some friends about technology firsts the other day, like our first C or Perl-based CGI scripts, writing Basic on an Acorn, or this little gem from when I worked at &lt;a href=&quot;http://beatthatquote.com/&quot;&gt;beatthatquote.com&lt;/a&gt; back in the day.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;So, I’ll just email myself this Ajax magic so I can use it in my other projects…&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/ajax.png&quot; alt=&quot;Ajax magic&quot; /&gt;&lt;/p&gt;
+</description>
+        <pubDate>Mon, 29 Feb 2016 19:56:24 +0000</pubDate>
+        <link>http://essays.uys.io/2016/02/29/ajax-when-was-your-first-time.html</link>
+        <guid isPermaLink="true">http://essays.uys.io/2016/02/29/ajax-when-was-your-first-time.html</guid>
+        
+        <category>ajax</category>
+        
+        <category>dinosaur</category>
+        
+        
+      </item>
     
       <item>
         <title>A Spacemacs layer for Pixie</title>
@@ -20,7 +84,7 @@
 
 &lt;p&gt;Start with creating the layer from within Spacemacs:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;&amp;lt;SPC&amp;gt; : configuration-layer/create-layer &amp;lt;RET&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;&amp;lt;SPC&amp;gt; : configuration-layer/create-layer &amp;lt;RET&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Press &lt;code&gt;&amp;lt;RET&amp;gt;&lt;/code&gt; again to create the layer in the default directory &lt;code&gt;$HOME/.emacs.d/private&lt;/code&gt;.&lt;/p&gt;
 
@@ -42,7 +106,7 @@
 
 &lt;p&gt;Here’s what I came up with for Pixie. At the moment, it offers bindings to start the REPL, and eval s-expressions (and an option to jump to the REPL after evaluation).&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elisp&quot; data-lang=&quot;elisp&quot;&gt;&lt;span class=&quot;c1&quot;&gt;;;; packages.el --- pixie Layer packages File for Spacemacs&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-elisp&quot; data-lang=&quot;elisp&quot;&gt;&lt;span class=&quot;c1&quot;&gt;;;; packages.el --- pixie Layer packages File for Spacemacs&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;;;&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;;; Copyright (c) 2012-2014 Sylvain Benner&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;;; Copyright (c) 2014-2015 Sylvain Benner &amp;amp; Contributors&lt;/span&gt;
@@ -95,11 +159,11 @@
 &lt;span class=&quot;c1&quot;&gt;;;&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;;; Often the body of an initialize function uses `use-package&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;c1&quot;&gt;;; For more info on `use-package&amp;#39;, see readme:&lt;/span&gt;
-&lt;span class=&quot;c1&quot;&gt;;; https://github.com/jwiegley/use-package&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;c1&quot;&gt;;; https://github.com/jwiegley/use-package&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;It’s by no means complete, and I plan to implement basic functionality involving navigation, documentation, tests (Pixie test frameworks permitting), and evaluation of more forms.&lt;/p&gt;
 </description>
-        <pubDate>Sat, 17 Oct 2015 16:35:34 +0100</pubDate>
+        <pubDate>Sat, 17 Oct 2015 15:35:34 +0000</pubDate>
         <link>http://essays.uys.io/2015/10/17/spacemacs-layer-for-pixie.html</link>
         <guid isPermaLink="true">http://essays.uys.io/2015/10/17/spacemacs-layer-for-pixie.html</guid>
         
@@ -123,7 +187,7 @@
 
 &lt;p&gt;A first run failed with this error:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp: In function ‘int main(int, char**)’:&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp: In function ‘int main(int, char**)’:&lt;/span&gt;
 &lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’&lt;/span&gt;
 &lt;span class=&quot;go&quot;&gt;  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); &lt;/span&gt;
 &lt;span class=&quot;go&quot;&gt;                                                  ^&lt;/span&gt;
@@ -160,25 +224,25 @@
 &lt;span class=&quot;go&quot;&gt;in internal function read-string&lt;/span&gt;
 
 &lt;span class=&quot;go&quot;&gt;RuntimeException: :pixie.stdlib/EOFWhileReadingException Unexpected EOF while reading&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;&amp;lt;/pre&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;go&quot;&gt;&amp;lt;/pre&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;The error&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;/tmp/tmp.cpp:19:50: error: no matching function for call to ‘DumpValue(&amp;lt;anonymous enum&amp;gt;)’&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;  PixieChecker::DumpValue(SDL_PIXELFORMAT_RGBA8888); &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;can be worked around by ensuring the &lt;a href=&quot;https://github.com/pixie-lang/pixie/blob/master/pixie/ffi-infer.pxi&quot;&gt;FFI-infer&lt;/a&gt; runs C++ with &lt;code&gt;-std=c++0x&lt;/code&gt;, because this more recent spec lifts the limitation of unnamed types being used as template arguments.&lt;/p&gt;
 
 &lt;p&gt;Instead, I just installed &lt;a href=&quot;http://clang.llvm.org/&quot;&gt;Clang&lt;/a&gt; and set up my &lt;em&gt;alternatives&lt;/em&gt; to point to it:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install clang&lt;/span&gt;
-&lt;span class=&quot;go&quot;&gt;sudo update-alternatives --set c++ /usr/bin/clang++&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-console&quot; data-lang=&quot;console&quot;&gt;&lt;span class=&quot;go&quot;&gt;sudo apt-get install clang&lt;/span&gt;
+&lt;span class=&quot;go&quot;&gt;sudo update-alternatives --set c++ /usr/bin/clang++&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Et voilà!&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/mandelbrot-pixie.png&quot; alt=&quot;Mandelbrot with Pixie&quot; /&gt;&lt;/p&gt;
 </description>
-        <pubDate>Sun, 11 Oct 2015 23:59:15 +0100</pubDate>
+        <pubDate>Sun, 11 Oct 2015 22:59:15 +0000</pubDate>
         <link>http://essays.uys.io/2015/10/11/mandelbrot-fractal-with-pixie-on-ubuntu.html</link>
         <guid isPermaLink="true">http://essays.uys.io/2015/10/11/mandelbrot-fractal-with-pixie-on-ubuntu.html</guid>
         
@@ -208,7 +272,7 @@
 &lt;p&gt;&lt;img src=&quot;/assets/bizdaysuntil.png&quot; alt=&quot;business days until Xmas&quot; /&gt;&lt;/p&gt;
 
 </description>
-        <pubDate>Thu, 17 Sep 2015 20:55:31 +0100</pubDate>
+        <pubDate>Thu, 17 Sep 2015 19:55:31 +0000</pubDate>
         <link>http://essays.uys.io/2015/09/17/n-business-days-until.html</link>
         <guid isPermaLink="true">http://essays.uys.io/2015/09/17/n-business-days-until.html</guid>
         
@@ -223,7 +287,7 @@
 
 &lt;p&gt;My gut feeling said that this should be possible, because the IFRAME has its own &lt;a href=&quot;http://www.w3.org/TR/html/browsers.html#nested-browsing-contexts&quot;&gt;browsing context&lt;/a&gt;. Browser support is a different question though, so I conducted a &lt;a href=&quot;https://github.com/opyate/securesecure&quot;&gt;quick experiment&lt;/a&gt;.&lt;/p&gt;
 </description>
-        <pubDate>Tue, 15 Sep 2015 20:43:07 +0100</pubDate>
+        <pubDate>Tue, 15 Sep 2015 19:43:07 +0000</pubDate>
         <link>http://essays.uys.io/2015/09/15/can-you-embed-a-secure-iframe-on-a-secure-site.html</link>
         <guid isPermaLink="true">http://essays.uys.io/2015/09/15/can-you-embed-a-secure-iframe-on-a-secure-site.html</guid>
         
@@ -289,15 +353,15 @@
 
 &lt;p&gt;Create this simple index file:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;IFRAME below&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;frame1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://localhost:8000/i-dont-matter.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;IFRAME below&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;iframe&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;id=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;frame1&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;src=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;http://localhost:8000/i-dont-matter.html&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/iframe&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Create this simple form which will be loaded by the IFRAME:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;https://httpbin.org/post&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;form&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;action=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;https://httpbin.org/post&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;method=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;secret&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;placeholder=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Secret stuff here&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;submit&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/form&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;Host the code locally with Python:&lt;/p&gt;
 
@@ -308,14 +372,14 @@
 
 &lt;p&gt;Now, reload the page, but open your browser’s dev tools, and paste the code from the hack into the JavaScript console:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;form action=&amp;quot;https://httpbin.org/post&amp;quot; method=&amp;quot;POST&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;form action=&amp;quot;https://httpbin.org/post&amp;quot; method=&amp;quot;POST&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;input name=&amp;quot;secret&amp;quot; placeholder=&amp;quot;Secret stuff here&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;input type=&amp;quot;submit&amp;quot; onclick=&amp;quot;return hack()&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;function hack() { alert(&amp;quot;h4x0rz&amp;quot;); }&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;/script&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;lt;/form&amp;gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;frame1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;data:text/html;charset=utf-8,&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;getElementById&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;frame1&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;src&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;data:text/html;charset=utf-8,&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;escape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;contents&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
 
 &lt;p&gt;This is the MITM attack. This is what the attacker could do with the “in-the-clear data stream” we discussed before. The attacker simply matched on a known token (like the form submit button) and injected custom code with which to do evil.&lt;/p&gt;
 
@@ -356,7 +420,7 @@
 
 &lt;p&gt;Choose your position on the scale, and accept the risk that’s forthcoming.&lt;/p&gt;
 </description>
-        <pubDate>Thu, 10 Sep 2015 14:05:45 +0100</pubDate>
+        <pubDate>Thu, 10 Sep 2015 13:05:45 +0000</pubDate>
         <link>http://essays.uys.io/2015/09/10/security-considerations-of-using-a-secure-iframe-on-an-insecure-page.html</link>
         <guid isPermaLink="true">http://essays.uys.io/2015/09/10/security-considerations-of-using-a-secure-iframe-on-an-insecure-page.html</guid>
         
