@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="globalsign-domain-verification" content="ymX0NUSgRv8E1Waz2FeiQ-x7GoJOGzKydkbWi9zINZ">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Using Clojure with Unity3D inside Docker</title>
+  <meta name="description" content="I braced myself for a thorough hack to get Clojure working in Unity3D, and found that it’s already been done.">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="canonical" href="http://essays.uys.io/2016/03/29/using-clojure-with-unity3d-inside-docker.html">
+  <link rel="alternate" type="application/rss+xml" title="Unleash Your Server" href="http://essays.uys.io/feed.xml" />
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+
+  <body>
+
+    <header class="site-header">
+
+  <div class="wrapper">
+
+    <a class="site-title" href="/">
+      <img src="/assets/logo.png" alt="Unleash Your Server">
+    </a>
+
+    <nav class="site-nav">
+      <div class="trigger">
+        
+          
+        
+          
+          <a class="page-link" href="/archive/">Archive</a>
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrapper">
+        <div class="post">
+
+  <header class="post-header">
+    <h1 class="post-title">Using Clojure with Unity3D inside Docker</h1>
+    <p class="post-meta">
+      2016-03-29
+      
+      
+      
+        under
+        
+          <a class="post-tag unity3d" href="/tag/unity3d">unity3d</a>
+        
+          <a class="post-tag clojure" href="/tag/clojure">clojure</a>
+        
+          <a class="post-tag docker" href="/tag/docker">docker</a>
+        
+      
+    </p>
+  </header>
+
+  <article class="post-content">
+    <p>I braced myself for a thorough hack to get Clojure working in Unity3D, and found that it’s <a href="https://github.com/arcadia-unity/Arcadia">already been done</a>.</p>
+
+<p>So, I instead spent my time implementing a subset of Flappy Bird.</p>
+
+<p><img src="/assets/flappy.gif" alt="flappy bird" /></p>
+
+<p>When using Unity3D, I can imagine most of the work going into asset creation, story/level progression and play testing. This is the only real code I wrote:</p>
+
+<h2 id="a-bird">A bird</h2>
+
+<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nf">defcomponent</span> <span class="nv">Bird</span> <span class="p">[</span><span class="o">^</span><span class="nv">Vector2</span> <span class="nv">force</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">Start</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span>
+         <span class="p">(</span><span class="nf">reset!</span> <span class="nv">score</span> <span class="mi">0</span><span class="p">))</span>
+  <span class="p">(</span><span class="nf">Update</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span>
+          <span class="p">(</span><span class="nf">swap!</span> <span class="nv">score</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">n</span><span class="p">]</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">n</span> <span class="nv">Time/deltaTime</span><span class="p">)))</span>
+          <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">Input/anyKeyDown</span><span class="p">)</span>
+            <span class="p">(</span><span class="nb">.. </span><span class="nv">this</span> <span class="p">(</span><span class="nf">GetComponent</span> <span class="nv">Rigidbody2D</span><span class="p">)</span>
+            <span class="c1">;; flap yer wings, bud!</span>
+                <span class="p">(</span><span class="nf">AddForce</span> <span class="nv">force</span> <span class="nv">ForceMode2D/Impulse</span><span class="p">))))</span>
+  <span class="p">(</span><span class="nf">OnCollisionEnter2D</span> <span class="p">[</span><span class="nv">this</span> <span class="nv">collision</span><span class="p">]</span>
+                      <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="p">(</span><span class="nb">.. </span><span class="nv">collision</span> <span class="nv">gameObject</span> <span class="nv">tag</span><span class="p">)</span> <span class="s">&quot;Boundary&quot;</span><span class="p">)</span>
+                        <span class="p">(</span><span class="nf">game-over</span><span class="p">))))</span></code></pre></figure>
+
+<h2 id="move-some-pipes">Move some pipes</h2>
+
+<figure class="highlight"><pre><code class="language-clojure" data-lang="clojure"><span class="p">(</span><span class="nf">defcomponent</span> <span class="nv">MovingPipe</span> <span class="p">[</span><span class="o">^</span><span class="nb">float </span><span class="nv">speed</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">Update</span> <span class="p">[</span><span class="nv">this</span><span class="p">]</span> <span class="p">(</span><span class="nf">pipe-update</span> <span class="nv">this</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">+-</span> <span class="p">[]</span>
+  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">= </span><span class="mi">0</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">2</span><span class="p">))</span>
+    <span class="nv">+</span>
+    <span class="nv">-</span><span class="p">))</span>
+
+<span class="p">(</span><span class="kd">defn </span><span class="nv">pipe-update</span> <span class="p">[</span><span class="o">^</span><span class="nv">MovingPipe</span> <span class="nv">this</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">.. </span><span class="nv">this</span> <span class="nv">transform</span> <span class="p">(</span><span class="nf">Translate</span> <span class="p">(</span><span class="nb">* </span><span class="p">(</span><span class="nf">.speed</span> <span class="nv">this</span><span class="p">)</span> <span class="nv">Time/deltaTime</span><span class="p">)</span>
+                                <span class="mi">0</span>
+                                <span class="mi">0</span><span class="p">))</span>
+  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">&lt; </span><span class="p">(</span><span class="nb">.. </span><span class="nv">this</span> <span class="nv">transform</span> <span class="nv">position</span> <span class="nv">x</span><span class="p">)</span>
+         <span class="mi">-1</span><span class="p">)</span>
+    <span class="p">(</span><span class="nf">set!</span> <span class="p">(</span><span class="nb">.. </span><span class="nv">this</span> <span class="nv">transform</span> <span class="nv">position</span><span class="p">)</span>
+          <span class="p">(</span><span class="nf">Vector3.</span> <span class="mi">1</span>
+                    <span class="p">((</span><span class="nf">+-</span><span class="p">)</span> <span class="c1">; fluctuating pipe heights</span>
+                     <span class="p">(</span><span class="nb">.. </span><span class="nv">this</span> <span class="nv">transform</span> <span class="nv">position</span> <span class="nv">y</span><span class="p">)</span>
+                     <span class="p">(</span><span class="nb">* </span><span class="mf">0.3</span> <span class="p">(</span><span class="nf">rand</span><span class="p">)))</span>
+                    <span class="mi">0</span><span class="p">))))</span></code></pre></figure>
+
+<p>Oh, and I did mention that I’m doing all of this <a href="https://github.com/opyate/unity3d">inside Docker</a>.</p>
+
+  </article>
+
+</div>
+
+      </div>
+    </div>
+
+    <footer class="site-footer">
+</footer>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+  </body>
+
+</html>
